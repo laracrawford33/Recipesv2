@@ -1,7 +1,12 @@
-import { notFound } from 'next/navigation';
-import { getRecipeById } from '@/lib/queries/getRecipeById';
+import { notFound } from "next/navigation";
+import { getRecipeById } from "@/lib/queries/getRecipeById";
+import { RecipeActions } from "@/app/components/RecipeActions";
 
-export default async function RecipeDetailPage({ params }: { params: { id: string } }) {
+export default async function RecipeDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const recipe = await getRecipeById(params.id);
 
   if (!recipe) return notFound();
@@ -11,12 +16,14 @@ export default async function RecipeDetailPage({ params }: { params: { id: strin
       <h1 className="text-3xl font-bold mb-4">{recipe.title}</h1>
       <p className="text-gray-600 mb-4">{recipe.category}</p>
 
+      <RecipeActions recipeId={recipe.id} />
+
       <h2 className="text-xl font-semibold mt-4 mb-2">Ingredients</h2>
       <ul className="list-disc list-inside">
         {recipe.ingredients.map((item) => (
           <li key={item.id}>
             {item.quantity} {item.measurement} {item.name}
-            {item.description ? ` — ${item.description}` : ''}
+            {item.description ? ` — ${item.description}` : ""}
           </li>
         ))}
       </ul>
