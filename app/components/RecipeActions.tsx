@@ -22,15 +22,15 @@ export function RecipeActions({ recipeId }: { recipeId: string }) {
     <div className="flex gap-4 mt-6">
       <button
         onClick={() => router.push(`/dashboard/recipe/edit/${recipeId}`)}
-        className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
+        className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
       >
-        ✏️ Edit
+        Edit
       </button>
       <button
         onClick={handleDelete}
-        className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+        className="bg-sky-800 text-white px-4 py-2 rounded hover:bg-red-700 transition"
       >
-        🗑️ Delete
+        Delete
       </button>
     </div>
   );
