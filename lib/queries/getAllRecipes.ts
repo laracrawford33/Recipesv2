@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase';
 
 export type RecipeSummary = {
+  image_url: string;
   id: string;
   title: string;
   category: string;
@@ -16,7 +17,7 @@ export async function getAllRecipes({
 } = {}): Promise<RecipeSummary[]> {
   let query = supabase
     .from('recipes')
-    .select('id, title, category, created_at')
+    .select('id, title, category, created_at, image_url')
     .order('created_at', { ascending: false });
 
   if (search) {

@@ -55,8 +55,11 @@ export default function DashboardPage() {
             className="block bg-white rounded shadow hover:shadow-lg transition overflow-hidden"
           >
             <div className="h-40 bg-sage flex items-center justify-center text-gray-600">
-              {/* Replace with actual image later */}
-              <span className="text-sm">Image Placeholder</span>
+              <img
+                src={recipe.image_url}
+                alt={recipe.title}
+                className="h-40 w-full object-cover"
+              />
             </div>
             <div className="p-4">
               <h3 className="text-lg font-bold text-earthy">{recipe.title}</h3>
