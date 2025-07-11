@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
+import { FiMinus, FiPlus, FiX } from "react-icons/fi";
 
 type Ingredient = {
   quantity: string;
@@ -110,7 +111,7 @@ function RecipeForm({ recipe }: RecipeFormProps) {
       {ingredients.map((ing, i) => (
         <div
           key={i}
-          className="grid grid-cols-1 sm:grid-cols-5 gap-2 items-center"
+          className="grid grid-cols-1 sm:[grid-template-columns:auto_1fr_1fr_1fr_1fr] gap-2 items-center"
         >
           <input
             placeholder="Qty"
@@ -153,16 +154,15 @@ function RecipeForm({ recipe }: RecipeFormProps) {
             }}
             className="p-2 border rounded"
           />
-
           <button
             type="button"
             onClick={() => {
               const updated = ingredients.filter((_, index) => index !== i);
               setIngredients(updated);
             }}
-            className="text-red-600"
+            className="bg-rose-800 text-white rounded items-center py-1 px-2 text-sm  w-auto justify-self-end"
           >
-                  ➖    {" "}
+            <FiX />
           </button>
         </div>
       ))}
@@ -174,14 +174,15 @@ function RecipeForm({ recipe }: RecipeFormProps) {
             { quantity: "", measurement: "", name: "", description: "" },
           ])
         }
-        className="text-blue-600"
+        className="bg-sky-800 text-white rounded flex flex-row gap-2 items-center py-1 px-2 text-sm"
       >
-        ➕ Add Ingredient
+        <FiPlus />
+        Add Ingredient
       </button>
 
       <h3 className="font-semibold">Instructions</h3>
       {steps.map((step, i) => (
-        <div key={i} className="flex flex-col sm:flex-row gap-2 items-start">
+        <div key={i} className="flex flex-col sm:flex-row gap-2 items-center">
           <textarea
             placeholder={`Step ${i + 1}`}
             value={step}
@@ -199,9 +200,9 @@ function RecipeForm({ recipe }: RecipeFormProps) {
               const updated = steps.filter((_, index) => index !== i);
               setSteps(updated);
             }}
-            className="text-red-600"
+            className="bg-rose-800 text-white rounded flex flex-row gap-2 items-center py-1 px-2 text-sm"
           >
-            ➖
+            <FiX />
           </button>
         </div>
       ))}
@@ -209,9 +210,10 @@ function RecipeForm({ recipe }: RecipeFormProps) {
       <button
         type="button"
         onClick={() => setSteps([...steps, ""])}
-        className="text-blue-600"
+        className="bg-sky-800 text-white rounded flex flex-row gap-2 items-center py-1 px-2 text-sm"
       >
-          ➕ Add Step
+        <FiPlus />
+        Add Step
       </button>
 
       <div className="flex gap-4">
@@ -220,8 +222,8 @@ function RecipeForm({ recipe }: RecipeFormProps) {
           disabled={loading}
           className={`px-4 py-2 rounded text-white transition ${
             loading
-              ? "bg-blue-400 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
+              ? "bg-teal-400 cursor-not-allowed"
+              : "bg-teal-600 hover:bg-teal-700"
           }`}
         >
           {loading ? "Saving..." : recipe ? "Update Recipe" : "Save Recipe"}

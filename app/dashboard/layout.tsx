@@ -13,7 +13,7 @@ export default function DashboardLayout({
     <div className="flex min-h-screen">
       {/* Sidebar */}
 
-      <aside className="hidden md:flex flex-col w-64 bg-gray-100 p-4 space-y-4">
+      <aside className="hidden md:flex flex-col w-48 bg-gray-300 p-4 space-y-4">
         <h2 className="text-xl font-bold">Recipe App</h2>
 
         <nav className="flex flex-col space-y-2">
@@ -21,7 +21,7 @@ export default function DashboardLayout({
             href="/dashboard"
             className="hover:underline flex items-center gap-2"
           >
-            <FiHome /> Dashboard
+            <FiHome /> Home
           </Link>
 
           <Link
@@ -41,7 +41,7 @@ export default function DashboardLayout({
       </aside>
       {/* Main Content */}
 
-      <main className="flex-1 p-4">
+      <main className="flex-1 p-4 bg-gray-200">
         {/* Mobile Top Bar */}
 
         <div className="md:hidden mb-4 flex justify-between items-center">
@@ -60,7 +60,7 @@ export default function DashboardLayout({
               className="hover:underline flex items-center gap-2"
               onClick={() => setMenuOpen(false)}
             >
-              <FiHome /> Dashboard
+              <FiHome /> Home
             </Link>
 
             <Link
