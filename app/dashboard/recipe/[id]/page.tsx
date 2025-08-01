@@ -2,15 +2,9 @@ import * as React from "react";
 import { notFound } from "next/navigation";
 import { getRecipeById } from "@/lib/queries/getRecipeById";
 import { RecipeActions } from "@/app/components/RecipeActions";
-import { Metadata, ResolvingMetadata } from "next";
+import type { RecipePageProps } from "@/lib/types/recipe-page";
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default async function Page({ params }: Props) {
-  const { id } = params;
+export default async function RecipePage({ params }: RecipePageProps) {
   const recipe = await getRecipeById(params.id);
 
   if (!recipe) return notFound();
