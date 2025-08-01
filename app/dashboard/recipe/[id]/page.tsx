@@ -1,12 +1,16 @@
+import * as React from "react";
 import { notFound } from "next/navigation";
 import { getRecipeById } from "@/lib/queries/getRecipeById";
 import { RecipeActions } from "@/app/components/RecipeActions";
+import { Metadata, ResolvingMetadata } from "next";
 
-export default async function RecipeDetailPage({
-  params,
-}: {
+type Props = {
   params: { id: string };
-}) {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function Page({ params }: Props) {
+  const { id } = params;
   const recipe = await getRecipeById(params.id);
 
   if (!recipe) return notFound();
@@ -29,9 +33,11 @@ export default async function RecipeDetailPage({
       </ul>
 
       <h2 className="text-xl font-semibold mt-6 mb-2">Instructions</h2>
-      <ol className="list-decimal list-inside space-y-2">
+      <ol className="list-decimal list-inside space-y-2 divide-y-2 divide-gray-400">
         {recipe.instructions.map((step) => (
-          <li key={step.id}>{step.text}</li>
+          <li className="pb-2" key={step.id}>
+            {step.text}
+          </li>
         ))}
       </ol>
     </div>
