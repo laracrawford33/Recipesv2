@@ -25,6 +25,7 @@ type RecipeFormProps = {
     category: string;
     ingredients: Ingredient[];
     instructions: Instruction[];
+    image_url?: string;
   };
 };
 
@@ -41,6 +42,8 @@ function RecipeForm({ recipe }: RecipeFormProps) {
     recipe?.instructions?.map((step) => step.text) || [""]
   );
 
+  const [imageUrl, setImageUrl] = useState(recipe?.image_url || "");
+
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -53,14 +56,14 @@ function RecipeForm({ recipe }: RecipeFormProps) {
       if (recipeId) {
         await supabase
           .from("recipes")
-          .update({ title, category })
+          .update({ title, category, image_url: imageUrl })
           .eq("id", recipeId);
         await supabase.from("ingredients").delete().eq("recipe_id", recipeId);
         await supabase.from("instructions").delete().eq("recipe_id", recipeId);
       } else {
         const { data, error } = await supabase
           .from("recipes")
-          .insert({ title, category })
+          .insert({ title, category, image_url: imageUrl })
           .select()
           .single();
         if (error) throw error;
@@ -103,6 +106,15 @@ function RecipeForm({ recipe }: RecipeFormProps) {
         placeholder="Category (e.g. Dessert)"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
+        className="w-full p-2 border rounded"
+        required
+      />
+
+      <input
+        type="text"
+        placeholder="Image URL"
+        value={imageUrl}
+        onChange={(e) => setImageUrl(e.target.value)}
         className="w-full p-2 border rounded"
         required
       />

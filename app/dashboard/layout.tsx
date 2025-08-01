@@ -14,7 +14,12 @@ export default function DashboardLayout({
       {/* Sidebar */}
 
       <aside className="hidden md:flex flex-col w-48 bg-gray-300 p-4 space-y-4">
-        <h2 className="text-xl font-bold">Recipe App</h2>
+        <Link
+          href="/dashboard"
+          className="hover:underline flex items-center gap-2"
+        >
+          <h2 className="text-xl font-bold">Recipe App</h2>
+        </Link>
 
         <nav className="flex flex-col space-y-2">
           <Link
@@ -28,7 +33,7 @@ export default function DashboardLayout({
             href="/dashboard/recipes"
             className="hover:underline flex items-center gap-2"
           >
-            <FiBookOpen /> My Recipes
+            <FiBookOpen /> Search
           </Link>
 
           <Link
@@ -45,8 +50,13 @@ export default function DashboardLayout({
         {/* Mobile Top Bar */}
 
         <div className="md:hidden mb-4 flex justify-between items-center">
-          <h1 className="text-xl font-bold">Recipe App</h1>
-
+          <Link
+            href="/dashboard"
+            className="hover:underline flex items-center gap-2"
+            onClick={() => setMenuOpen(false)}
+          >
+            <h1 className="text-xl font-bold">Recipe App</h1>
+          </Link>
           <button onClick={() => setMenuOpen(!menuOpen)} className="text-2xl">
             {menuOpen ? <FiX /> : <FiMenu />}
           </button>
@@ -68,7 +78,7 @@ export default function DashboardLayout({
               className="hover:underline flex items-center gap-2"
               onClick={() => setMenuOpen(false)}
             >
-              <FiBookOpen /> My Recipes
+              <FiBookOpen /> Search
             </Link>
 
             <Link

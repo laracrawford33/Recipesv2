@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from "@/lib/supabase";
 
 export type Ingredient = {
   id: string;
@@ -27,23 +27,23 @@ export type Recipe = {
 
 export async function getRecipeById(id: string): Promise<Recipe | null> {
   const { data: recipe, error: recipeError } = await supabase
-    .from('recipes')
-    .select('*')
-    .eq('id', id)
+    .from("recipes")
+    .select("*")
+    .eq("id", id)
     .single();
 
   if (!recipe || recipeError) return null;
 
   const { data: ingredients = [] } = await supabase
-    .from('ingredients')
-    .select('*')
-    .eq('recipe_id', id);
+    .from("ingredients")
+    .select("*")
+    .eq("recipe_id", id);
 
   const { data: instructions = [] } = await supabase
-    .from('instructions')
-    .select('*')
-    .eq('recipe_id', id)
-    .order('step_number');
+    .from("instructions")
+    .select("*")
+    .eq("recipe_id", id)
+    .order("step_number");
 
   return {
     ...recipe,
