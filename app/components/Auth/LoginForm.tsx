@@ -28,17 +28,20 @@ export default function LoginForm() {
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="input"
+        className="input bg-white border border-gray-300 rounded p-2 w-full"
       />
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="input"
+        className="input  bg-white border border-gray-300 rounded p-2 w-full"
       />
       {error && <p className="text-red-500">{error}</p>}
-      <button type="submit" className="btn">
+      <button
+        type="submit"
+        className="btn bg-emerald-700 text-white p-2 rounded w-full"
+      >
         Log In
       </button>
     </form>
